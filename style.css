@@ -1,35 +1,41 @@
-/* =====================================================
-   PITER — MOBILE FIRST
+/* =========================================================
+   PITER.
+   DARK • SASUKE • PURPLE • MOBILE FIRST
    LUTA • TREINO • EVOLUÇÃO
-   DESIGN 100% CELULAR
-===================================================== */
+========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 
-/* =====================================================
+/* =========================================================
    VARIÁVEIS
-===================================================== */
+========================================================= */
 
 :root {
-    --bg: #02040a;
-    --bg2: #060a14;
-    --card: rgba(9, 16, 30, 0.88);
+    --bg: #05030a;
+    --bg-2: #090611;
+    --bg-3: #0e0918;
 
-    --blue: #237cff;
-    --blue2: #00c8ff;
+    --purple: #8b3dff;
+    --purple-light: #b56cff;
+    --purple-dark: #4c16a8;
 
-    --text: #f5f8ff;
-    --muted: #7f8ba3;
+    --text: #f7f3ff;
+    --text-soft: #c0b7d0;
+    --muted: #81778f;
 
-    --line: rgba(45, 120, 255, .20);
-    --glow: rgba(0, 119, 255, .25);
+    --line: rgba(157, 75, 255, .22);
+    --line-bright: rgba(166, 82, 255, .55);
+
+    --glow: rgba(125, 45, 255, .28);
+
+    --radius: 18px;
 }
 
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 * {
     margin: 0;
@@ -39,21 +45,24 @@
 
 html {
     scroll-behavior: smooth;
-    width: 100%;
+    background: var(--bg);
 }
 
 body {
     width: 100%;
-    min-width: 0;
     min-height: 100vh;
-
     overflow-x: hidden;
 
     background:
         radial-gradient(
-            circle at 50% 0%,
-            rgba(13, 52, 110, .40),
-            transparent 35%
+            circle at 50% -10%,
+            rgba(112, 38, 220, .24),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 100% 40%,
+            rgba(80, 20, 160, .12),
+            transparent 30%
         ),
         var(--bg);
 
@@ -61,7 +70,8 @@ body {
 
     font-family: 'Inter', Arial, sans-serif;
 
-    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 img,
@@ -70,12 +80,13 @@ video {
     max-width: 100%;
 }
 
-img {
-    width: 100%;
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
 }
 
-video {
-    width: 100%;
+button {
+    font-family: inherit;
 }
 
 a {
@@ -83,30 +94,39 @@ a {
     text-decoration: none;
 }
 
-button {
-    font-family: inherit;
-    border: 0;
-}
-
 ::selection {
-    background: var(--blue);
+    background: var(--purple);
     color: white;
 }
 
 
-/* =====================================================
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #05030a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5420a2;
+    border-radius: 20px;
+}
+
+
+/* =========================================================
    TELA DE ENTRADA
-===================================================== */
+========================================================= */
 
 #entrada {
     position: fixed;
-
     inset: 0;
 
     z-index: 9999;
-
-    width: 100%;
-    height: 100dvh;
 
     display: flex;
     align-items: center;
@@ -117,37 +137,56 @@ button {
     background:
         radial-gradient(
             circle at center,
-            rgba(11, 57, 125, .28),
-            transparent 38%
+            rgba(122, 38, 255, .22),
+            transparent 35%
         ),
-        #010208;
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(79, 25, 160, .15),
+            transparent 30%
+        ),
+        #030208;
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 
-/* fundo mágico */
+/* SAÍDA DA TELA */
+
+#entrada.saida {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FUNDO DA ENTRADA
+========================================================= */
 
 .entrada-bg {
     position: absolute;
-
-    inset: -30%;
+    inset: -40%;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(0, 119, 255, .20),
-            transparent 28%
+            rgba(145, 55, 255, .22),
+            transparent 25%
         ),
         radial-gradient(
             circle at 30% 70%,
-            rgba(0, 190, 255, .08),
-            transparent 30%
+            rgba(86, 28, 180, .18),
+            transparent 25%
         );
 
     animation: respirar 5s ease-in-out infinite;
 }
 
 
-/* círculos */
+/* CÍRCULOS */
 
 .entrada-bg::before,
 .entrada-bg::after {
@@ -155,95 +194,98 @@ button {
 
     position: absolute;
 
+    left: 50%;
+    top: 50%;
+
+    width: 330px;
+    height: 330px;
+
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba(155, 70, 255, .18);
+
     border-radius: 50%;
 
-    border: 1px solid rgba(40, 130, 255, .16);
-
     box-shadow:
-        0 0 80px rgba(0, 102, 255, .12),
-        inset 0 0 80px rgba(0, 102, 255, .08);
+        0 0 60px rgba(122, 38, 255, .15),
+        inset 0 0 60px rgba(122, 38, 255, .08);
 
-    animation: girar 16s linear infinite;
-}
-
-.entrada-bg::before {
-    inset: 20%;
+    animation: girar 18s linear infinite;
 }
 
 .entrada-bg::after {
-    inset: 34%;
+    width: 220px;
+    height: 220px;
 
+    border-color: rgba(193, 111, 255, .12);
+
+    animation-duration: 11s;
     animation-direction: reverse;
-    animation-duration: 10s;
 }
 
 
-/* partículas */
+/* =========================================================
+   PARTÍCULAS ROXAS
+========================================================= */
 
 .entrada-particulas {
     position: absolute;
-
     inset: 0;
 
-    opacity: .45;
-
-    pointer-events: none;
+    opacity: .6;
 
     background-image:
         radial-gradient(
             circle,
-            #ffffff 1px,
-            transparent 1px
+            rgba(190, 106, 255, .9) 1px,
+            transparent 1.5px
         ),
         radial-gradient(
             circle,
-            #2587ff 1px,
-            transparent 1px
+            rgba(119, 48, 255, .7) 1px,
+            transparent 1.5px
         );
 
     background-size:
-        80px 80px,
+        75px 75px,
         120px 120px;
 
-    animation:
-        particulas 14s linear infinite;
+    animation: particulas 14s linear infinite;
 }
 
 
-/* conteúdo */
+/* =========================================================
+   CONTEÚDO DA ENTRADA
+========================================================= */
 
 .entrada-conteudo {
     position: relative;
-
     z-index: 5;
 
     width: calc(100% - 36px);
-    max-width: 420px;
+    max-width: 430px;
 
     text-align: center;
 }
 
-
-/* mini título */
-
 .mini-titulo {
     display: block;
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 
-    color: #7695cb;
+    color: #a889c9;
 
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 800;
 
     letter-spacing: 3px;
 }
 
 
-/* linha */
+/* LINHA */
 
 .linha {
-    width: 50px;
+    width: 65px;
     height: 2px;
 
     margin: 0 auto 22px;
@@ -252,51 +294,55 @@ button {
         linear-gradient(
             90deg,
             transparent,
-            var(--blue),
+            var(--purple-light),
             transparent
         );
 
     box-shadow:
-        0 0 15px var(--blue);
+        0 0 15px var(--purple);
 }
 
 
 /* PITER */
 
 .entrada-conteudo h1 {
-    font-size: clamp(64px, 22vw, 100px);
+    font-size: clamp(70px, 23vw, 120px);
 
-    line-height: .85;
+    line-height: .82;
 
     font-weight: 900;
 
-    letter-spacing: -6px;
+    letter-spacing: -7px;
+
+    color: #fff;
 
     text-shadow:
-        0 0 20px rgba(0, 119, 255, .35),
-        0 0 70px rgba(0, 119, 255, .18);
+        0 0 18px rgba(145, 55, 255, .45),
+        0 0 55px rgba(110, 32, 230, .28);
 }
 
 .entrada-conteudo h1 span {
-    color: var(--blue2);
+    color: var(--purple-light);
 }
 
 
-/* frase */
+/* FRASE */
 
 .entrada-conteudo p {
-    margin: 28px 0;
+    margin: 28px 0 32px;
 
-    color: #8d9ab4;
+    color: #a69bb5;
 
-    font-size: 10px;
-    line-height: 2.1;
+    font-size: 11px;
+    font-weight: 700;
 
-    letter-spacing: 4px;
+    line-height: 2;
+
+    letter-spacing: 5px;
 }
 
 
-/* botão */
+/* BOTÃO ENTRAR */
 
 .btn-entrada {
     display: flex;
@@ -306,31 +352,31 @@ button {
 
     width: 100%;
 
-    min-height: 56px;
+    min-height: 58px;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
-    border: 1px solid rgba(56, 139, 255, .45);
-
-    border-radius: 13px;
+    border: 1px solid var(--line-bright);
+    border-radius: 14px;
 
     color: white;
 
     background:
         linear-gradient(
             135deg,
-            rgba(15, 52, 105, .65),
-            rgba(7, 19, 42, .7)
+            rgba(90, 29, 170, .42),
+            rgba(25, 9, 48, .7)
         );
 
-    box-shadow:
-        0 0 30px rgba(0, 102, 255, .10);
+    backdrop-filter: blur(14px);
 
-    backdrop-filter: blur(15px);
+    box-shadow:
+        0 0 30px rgba(116, 36, 240, .13),
+        inset 0 0 25px rgba(145, 55, 255, .05);
 
     cursor: pointer;
 
-    transition: .25s;
+    transition: .3s;
 }
 
 .btn-entrada:active {
@@ -344,34 +390,30 @@ button {
 }
 
 .btn-entrada b {
-    color: var(--blue2);
-    font-size: 22px;
+    color: var(--purple-light);
+    font-size: 24px;
 }
 
 
-/* aviso */
+/* AVISO */
 
 .entrada-aviso {
     position: absolute;
 
-    bottom: 24px;
+    bottom: 22px;
 
-    left: 0;
-    right: 0;
-
-    text-align: center;
-
-    color: #3f4e69;
+    color: #51465d;
 
     font-size: 7px;
+    font-weight: 700;
 
     letter-spacing: 3px;
 }
 
 
-/* =====================================================
-   SITE
-===================================================== */
+/* =========================================================
+   SITE PRINCIPAL
+========================================================= */
 
 #site {
     display: none;
@@ -379,79 +421,76 @@ button {
     width: 100%;
     min-height: 100vh;
 
-    overflow: hidden;
-
     background:
         radial-gradient(
-            circle at 85% 10%,
-            rgba(0, 102, 255, .08),
+            circle at 90% 10%,
+            rgba(104, 34, 210, .12),
             transparent 25%
         ),
         var(--bg);
 }
 
 
-/* =====================================================
-   HEADER MOBILE
-===================================================== */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .topo {
     position: sticky;
 
     top: 0;
-
     z-index: 100;
-
-    width: 100%;
-
-    min-height: 58px;
 
     display: flex;
 
     align-items: center;
     justify-content: space-between;
 
-    gap: 8px;
+    gap: 10px;
 
-    padding: 10px 13px;
+    width: 100%;
 
-    border-bottom:
-        1px solid rgba(70, 120, 210, .12);
+    padding:
+        14px
+        max(15px, env(safe-area-inset-right))
+        14px
+        max(15px, env(safe-area-inset-left));
 
-    background:
-        rgba(2, 4, 10, .88);
+    border-bottom: 1px solid rgba(150, 70, 255, .12);
+
+    background: rgba(5, 3, 10, .82);
 
     backdrop-filter: blur(18px);
 }
 
 
-/* logo */
+/* LOGO */
 
 .logo {
     flex-shrink: 0;
 
-    font-size: 18px;
-
+    font-size: 20px;
     font-weight: 900;
 
     letter-spacing: -1px;
+
+    text-shadow:
+        0 0 20px rgba(145, 55, 255, .3);
 }
 
 .logo span {
-    color: var(--blue2);
+    color: var(--purple-light);
 }
 
 
-/* menu */
+/* NAV */
 
 nav {
     display: flex;
 
-    align-items: center;
-
     gap: 2px;
 
-    max-width: calc(100% - 65px);
+    max-width: 72%;
 
     overflow-x: auto;
 
@@ -465,167 +504,191 @@ nav::-webkit-scrollbar {
 nav a {
     flex-shrink: 0;
 
-    padding: 8px 7px;
+    padding: 8px 8px;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
-    color: #7e8ba3;
+    color: #8f869b;
 
-    font-size: 7px;
-
+    font-size: 8px;
     font-weight: 800;
 
     letter-spacing: .4px;
 
-    white-space: nowrap;
+    transition: .25s;
 }
 
-nav a:active {
+nav a:active,
+nav a:hover {
     color: white;
 
     background:
-        rgba(32, 105, 230, .18);
+        rgba(130, 45, 230, .15);
 }
 
 
-/* =====================================================
+/* =========================================================
    HERO
-===================================================== */
+========================================================= */
 
 .hero {
     position: relative;
 
-    width: 100%;
-
-    min-height: calc(100dvh - 58px);
-
     display: flex;
-
     align-items: center;
 
+    min-height: 680px;
+
     padding:
-        70px 18px
-        90px;
+        70px
+        18px
+        75px;
 
     overflow: hidden;
 
     background:
         radial-gradient(
-            circle at 85% 45%,
-            rgba(0, 102, 255, .18),
-            transparent 35%
+            circle at 85% 38%,
+            rgba(124, 42, 255, .22),
+            transparent 31%
         ),
         linear-gradient(
             180deg,
-            rgba(4, 10, 24, .1),
-            #03050c
+            rgba(9, 5, 20, .1),
+            #05030a
         );
 }
 
 
-/* brilho */
+/* BRILHO */
 
 .hero::before {
     content: "";
 
     position: absolute;
 
-    width: 220px;
-    height: 220px;
+    right: -120px;
+    top: 150px;
 
-    right: -110px;
-    top: 35%;
+    width: 300px;
+    height: 300px;
 
     border-radius: 50%;
 
-    background:
-        rgba(0, 102, 255, .18);
+    background: rgba(122, 38, 255, .16);
 
-    filter: blur(65px);
+    filter: blur(75px);
 }
 
 
-/* conteúdo */
+/* LINHAS */
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    right: -80px;
+    bottom: 100px;
+
+    width: 220px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(167, 78, 255, .5)
+        );
+
+    transform: rotate(-35deg);
+}
+
+
+/* CONTEÚDO */
 
 .hero-conteudo {
     position: relative;
-
-    z-index: 2;
+    z-index: 3;
 
     width: 100%;
+    max-width: 520px;
+
+    margin: 0 auto;
 }
 
 
-/* categoria */
+/* CATEGORIA */
 
 .categoria {
     display: inline-block;
 
-    color: #608bd2;
+    color: #a06de0;
 
     font-size: 8px;
+    font-weight: 900;
 
+    letter-spacing: 2.5px;
+}
+
+
+/* TÍTULO */
+
+.hero h2 {
+    margin-top: 15px;
+
+    font-size: clamp(75px, 25vw, 135px);
+
+    line-height: .78;
+
+    font-weight: 900;
+
+    letter-spacing: -8px;
+
+    text-shadow:
+        0 0 30px rgba(130, 38, 255, .25),
+        0 0 70px rgba(130, 38, 255, .12);
+}
+
+
+/* LINHA HERO */
+
+.hero-linha {
+    width: 85px;
+    height: 3px;
+
+    margin: 23px 0 17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            transparent
+        );
+
+    box-shadow:
+        0 0 18px var(--purple);
+}
+
+
+/* SUBTÍTULO */
+
+.hero h3 {
+    color: #b4a8c4;
+
+    font-size: 10px;
     font-weight: 800;
 
     letter-spacing: 2.5px;
 }
 
 
-/* PITER */
-
-.hero h2 {
-    margin-top: 15px;
-
-    font-size: clamp(62px, 22vw, 100px);
-
-    line-height: .85;
-
-    font-weight: 900;
-
-    letter-spacing: -6px;
-
-    text-shadow:
-        0 0 50px rgba(0, 119, 255, .18);
-}
-
-
-/* linha */
-
-.hero-linha {
-    width: 65px;
-    height: 3px;
-
-    margin: 17px 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--blue),
-            transparent
-        );
-
-    box-shadow:
-        0 0 15px var(--blue);
-}
-
-
-/* subtítulo */
-
-.hero h3 {
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    color: #9ba8bf;
-}
-
-
-/* descrição */
+/* TEXTO */
 
 .hero p {
-    max-width: 320px;
+    max-width: 340px;
 
-    margin: 18px 0 25px;
+    margin: 20px 0 27px;
 
     color: var(--muted);
 
@@ -635,20 +698,18 @@ nav a:active {
 }
 
 
-/* botões */
+/* BOTÕES */
 
 .hero-botoes {
     display: flex;
 
     flex-direction: column;
 
-    gap: 10px;
+    gap: 9px;
 
     width: 100%;
+    max-width: 350px;
 }
-
-
-/* botão geral */
 
 .botao {
     display: flex;
@@ -658,115 +719,131 @@ nav a:active {
 
     gap: 10px;
 
-    width: 100%;
+    min-height: 54px;
 
-    min-height: 52px;
-
-    padding: 14px 16px;
+    padding: 14px 18px;
 
     border: 1px solid var(--line);
 
-    border-radius: 11px;
+    border-radius: 13px;
 
     font-size: 9px;
-
     font-weight: 900;
 
-    letter-spacing: 1.3px;
+    letter-spacing: 1.5px;
 
-    transition: .25s;
+    transition: .3s;
+}
+
+.botao span {
+    color: var(--purple-light);
+
+    font-size: 18px;
 }
 
 .botao:active {
     transform: scale(.97);
 }
 
-.botao span {
-    color: var(--blue2);
 
-    font-size: 16px;
-}
-
-
-/* botão principal */
+/* PRINCIPAL */
 
 .botao.principal {
     background:
         linear-gradient(
             135deg,
-            #0d3e8c,
-            #091d42
+            #5420a4,
+            #251044
         );
 
+    border-color:
+        rgba(177, 91, 255, .5);
+
     box-shadow:
-        0 10px 35px rgba(0, 102, 255, .15);
+        0 10px 35px rgba(100, 35, 210, .2);
 }
 
 
-/* secundário */
+/* SECUNDÁRIO */
 
 .botao.secundario {
-    color: #9ba7bd;
-
     background:
-        rgba(10, 18, 35, .55);
+        rgba(17, 10, 29, .65);
+
+    color: #a49aaf;
 }
 
 
-/* número */
+/* NÚMERO */
 
 .hero-numero {
     position: absolute;
 
-    right: 8px;
-    bottom: 15px;
+    right: 10px;
+    bottom: 18px;
 
-    color: rgba(80, 120, 180, .10);
+    color: rgba(142, 62, 255, .08);
 
-    font-size: 90px;
-
+    font-size: 105px;
     font-weight: 900;
 
-    pointer-events: none;
+    line-height: 1;
 }
 
 
-/* =====================================================
+/* =========================================================
    FRASE
-===================================================== */
+========================================================= */
 
 .frase {
-    width: 100%;
-
-    padding: 75px 20px;
+    padding: 70px 20px;
 
     text-align: center;
 
     border-top:
-        1px solid rgba(50, 100, 180, .1);
+        1px solid rgba(150, 70, 255, .1);
 
     border-bottom:
-        1px solid rgba(50, 100, 180, .1);
+        1px solid rgba(150, 70, 255, .1);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(25, 10, 45, .2),
+            transparent
+        );
 }
 
 .frase > span {
-    color: var(--blue);
+    display: block;
 
-    font-size: 40px;
+    color: var(--purple-light);
+
+    font-family: Georgia, serif;
+
+    font-size: 50px;
+
+    line-height: .6;
 }
 
 .frase h2 {
-    margin: 8px auto 24px;
+    margin: 15px auto 25px;
 
-    font-size: clamp(24px, 7vw, 36px);
+    max-width: 450px;
 
-    line-height: 1.2;
+    font-size: clamp(26px, 8vw, 44px);
+
+    line-height: 1.13;
+
+    letter-spacing: -1px;
 }
 
 .frase strong {
     display: block;
 
-    color: var(--blue2);
+    margin-top: 5px;
+
+    color: var(--purple-light);
 }
 
 .frase-linha {
@@ -775,132 +852,127 @@ nav a:active {
 
     margin: auto;
 
-    background: var(--blue);
+    background: var(--purple);
 
     box-shadow:
-        0 0 15px var(--blue);
+        0 0 15px var(--purple);
 }
 
 
-/* =====================================================
+/* =========================================================
    SEÇÕES
-===================================================== */
+========================================================= */
 
 .secao {
     width: calc(100% - 30px);
 
-    max-width: 600px;
+    max-width: 1100px;
 
     margin: auto;
 
-    padding:
-        80px 0;
+    padding: 72px 0;
 }
-
 
 .titulo-secao {
     display: flex;
 
     justify-content: space-between;
+    align-items: flex-start;
 
-    gap: 10px;
+    gap: 15px;
 
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
-
 
 .secao h2,
 .instagram h2 {
-    margin-top: 9px;
+    margin-top: 10px;
 
-    font-size: clamp(39px, 12vw, 65px);
+    font-size: clamp(43px, 13vw, 78px);
 
-    line-height: .9;
+    line-height: .88;
 
-    letter-spacing: -3px;
+    letter-spacing: -4px;
 }
-
 
 .secao h2 span,
 .instagram h2 span {
-    color: var(--blue2);
+    color: var(--purple-light);
 }
-
 
 .titulo-secao p,
 .descricao {
-    max-width: 350px;
+    max-width: 450px;
 
-    margin-top: 15px;
+    margin-top: 17px;
 
     color: var(--muted);
 
     font-size: 12px;
 
-    line-height: 1.7;
+    line-height: 1.75;
 }
-
 
 .numero-secao {
     flex-shrink: 0;
 
-    color: rgba(50, 110, 200, .12);
+    color: rgba(145, 60, 255, .1);
 
     font-size: 55px;
-
     font-weight: 900;
 }
 
 
-/* =====================================================
+/* =========================================================
    LUTAS
-===================================================== */
+========================================================= */
 
 .lutas-container {
-    display: flex;
+    display: grid;
 
-    flex-direction: column;
-
-    gap: 20px;
-
-    width: 100%;
+    gap: 18px;
 }
 
-
-/* card */
-
 .luta-card {
-    width: 100%;
-
     overflow: hidden;
 
     border:
-        1px solid rgba(60, 110, 200, .17);
+        1px solid rgba(150, 65, 255, .2);
 
-    border-radius: 18px;
+    border-radius: var(--radius);
 
     background:
         linear-gradient(
             145deg,
-            rgba(14, 25, 48, .9),
-            rgba(5, 9, 18, .95)
+            rgba(26, 13, 47, .9),
+            rgba(8, 5, 14, .96)
         );
 
     box-shadow:
-        0 20px 50px rgba(0, 0, 0, .35);
+        0 25px 60px rgba(0, 0, 0, .35);
+
+    transition:
+        transform .35s ease,
+        border-color .35s ease;
+}
+
+.luta-card:active {
+    transform: scale(.985);
 }
 
 
-/* imagem */
+/* IMAGEM */
 
 .luta-imagem {
     position: relative;
+
+    overflow: hidden;
 
     width: 100%;
 
     aspect-ratio: 16 / 10;
 
-    overflow: hidden;
+    background: #08050d;
 }
 
 .luta-imagem img {
@@ -908,83 +980,98 @@ nav a:active {
     height: 100%;
 
     object-fit: cover;
+
+    transition: transform .7s ease;
+}
+
+.luta-card:hover .luta-imagem img {
+    transform: scale(1.06);
 }
 
 
-/* overlay */
+/* OVERLAY */
 
 .imagem-overlay {
     position: absolute;
-
     inset: 0;
 
     background:
         linear-gradient(
             180deg,
-            transparent 30%,
-            rgba(2, 5, 12, .85)
+            transparent 35%,
+            rgba(4, 2, 8, .88)
         );
 }
 
 
-/* número */
+/* NÚMERO */
 
 .luta-numero {
     position: absolute;
 
-    top: 12px;
-    right: 13px;
+    top: 14px;
+    right: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border:
+        1px solid rgba(195, 119, 255, .4);
+
+    border-radius: 50%;
 
     color: white;
 
-    font-size: 10px;
+    background:
+        rgba(25, 9, 43, .7);
 
+    backdrop-filter: blur(8px);
+
+    font-size: 9px;
     font-weight: 900;
-
-    letter-spacing: 2px;
 }
 
 
-/* conteúdo */
+/* CONTEÚDO */
 
 .luta-conteudo {
-    padding: 18px;
+    padding: 20px;
 }
 
-
 .anime {
-    color: var(--blue2);
+    color: var(--purple-light);
 
-    font-size: 7px;
-
+    font-size: 8px;
     font-weight: 900;
 
     letter-spacing: 2.5px;
 }
 
-
 .luta-conteudo h3 {
-    margin-top: 9px;
+    margin-top: 10px;
 
-    font-size: clamp(23px, 7vw, 35px);
+    font-size: clamp(25px, 7.5vw, 42px);
 
-    line-height: 1;
+    line-height: .95;
 
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
 }
-
 
 .luta-conteudo h3 span {
-    color: #53627d;
-
-    font-size: .42em;
-
     margin: 0 4px;
+
+    color: #665a73;
+
+    font-size: .4em;
 }
 
-
 .luta-conteudo p {
-    margin: 13px 0;
+    margin: 14px 0;
 
     color: var(--muted);
 
@@ -994,129 +1081,123 @@ nav a:active {
 }
 
 
-/* vídeo */
+/* VÍDEO */
 
 .video-box {
-    width: 100%;
-
     overflow: hidden;
 
-    margin-top: 16px;
+    margin-top: 18px;
 
     border:
-        1px solid rgba(50, 120, 230, .18);
+        1px solid rgba(140, 50, 255, .2);
 
     border-radius: 12px;
 
-    background: #000;
+    background: black;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .3);
 }
 
 .video-box video {
     width: 100%;
-
     height: auto;
-
-    max-height: 55vh;
-
-    object-fit: contain;
-
-    background: #000;
 }
 
 
-/* botão em breve */
+/* BOTÃO EM BREVE */
 
 .luta-botao {
     width: 100%;
 
-    margin-top: 5px;
+    margin-top: 8px;
 
-    color: #72809b;
+    color: #756a80;
 
     background:
-        rgba(20, 50, 100, .28);
+        rgba(40, 17, 68, .35);
 
     cursor: default;
 }
 
 
-/* =====================================================
+/* =========================================================
    HISTÓRIA
-===================================================== */
+========================================================= */
 
 .historia {
     border-top:
-        1px solid rgba(50, 100, 180, .1);
+        1px solid rgba(150, 70, 255, .1);
 }
-
 
 .historia-grid {
-    display: flex;
+    display: grid;
 
-    flex-direction: column;
-
-    gap: 30px;
+    gap: 25px;
 }
 
 
-/* frase */
+/* FRASE */
 
 .historia-frase {
-    padding: 22px;
+    padding: 25px 20px;
 
     border-left:
-        2px solid var(--blue);
+        3px solid var(--purple);
 
     background:
         linear-gradient(
             90deg,
-            rgba(20, 70, 140, .12),
+            rgba(106, 35, 190, .15),
             transparent
         );
+
+    box-shadow:
+        inset 15px 0 30px rgba(100, 30, 190, .03);
 }
 
-
 .historia-frase span {
-    color: var(--blue2);
+    color: var(--purple-light);
 
     font-size: 8px;
-
     font-weight: 900;
 
     letter-spacing: 2.5px;
 }
 
-
 .historia-frase h3 {
     margin-top: 14px;
 
-    font-size: 27px;
+    font-size: 29px;
 
     line-height: 1.05;
+
+    letter-spacing: -1px;
 }
 
 
-/* texto */
+/* TEXTO */
 
 .historia-texto p {
-    margin-bottom: 19px;
+    margin-bottom: 18px;
 
-    color: #8996ae;
+    color: #90869c;
 
     font-size: 13px;
 
-    line-height: 1.9;
+    line-height: 1.85;
 }
 
 
-/* final */
+/* FINAL */
 
 .historia-final {
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
+
+    margin-top: 20px;
 
     padding-top: 18px;
 
@@ -1126,94 +1207,94 @@ nav a:active {
     color: white;
 
     font-size: 9px;
-
     font-weight: 900;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
 }
-
 
 .historia-final b {
-    color: var(--blue2);
+    color: var(--purple-light);
 
-    font-size: 20px;
+    font-size: 22px;
 }
 
 
-/* =====================================================
+/* =========================================================
    TREINO
-===================================================== */
+========================================================= */
 
 .treino {
     border-top:
-        1px solid rgba(50, 100, 180, .1);
+        1px solid rgba(150, 70, 255, .1);
 }
 
-
 .treino-grid {
-    display: flex;
-
-    flex-direction: column;
+    display: grid;
 
     gap: 13px;
 }
 
-
-/* card */
-
 .treino-card {
     position: relative;
 
-    width: 100%;
-
-    min-height: 205px;
+    min-height: 190px;
 
     overflow: hidden;
 
-    padding: 23px;
+    padding: 22px;
 
     border:
-        1px solid rgba(60, 110, 200, .17);
+        1px solid rgba(150, 70, 255, .18);
 
-    border-radius: 17px;
+    border-radius: var(--radius);
 
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(0, 119, 255, .15),
-            transparent 38%
+            rgba(125, 38, 240, .2),
+            transparent 40%
         ),
-        rgba(8, 14, 28, .85);
+        rgba(12, 7, 22, .9);
+
+    transition: .3s;
 }
 
+.treino-card:active {
+    transform: scale(.98);
+}
 
 .treino-anime {
-    color: #6386be;
+    color: #9a7bb6;
 
-    font-size: 7px;
-
+    font-size: 8px;
     font-weight: 900;
 
     letter-spacing: 2.5px;
 }
 
-
 .treino-icon {
-    margin: 24px 0 13px;
+    margin: 20px 0 12px;
+
+    color: var(--purple-light);
 
     font-size: 32px;
-}
 
+    filter:
+        drop-shadow(
+            0 0 10px rgba(145, 55, 255, .45)
+        );
+}
 
 .treino-card h3 {
-    font-size: 22px;
+    font-size: 23px;
+
+    letter-spacing: -.5px;
 }
 
-
 .treino-card p {
-    max-width: 285px;
+    max-width: 290px;
 
-    margin-top: 9px;
+    margin-top: 8px;
 
     color: var(--muted);
 
@@ -1222,320 +1303,79 @@ nav a:active {
     line-height: 1.7;
 }
 
-
 .treino-numero {
     position: absolute;
 
-    right: 16px;
-    bottom: 10px;
+    right: 15px;
+    bottom: 8px;
 
-    color: rgba(60, 130, 230, .11);
+    color: rgba(145, 60, 255, .1);
 
-    font-size: 52px;
-
+    font-size: 58px;
     font-weight: 900;
 }
 
 
-/* =====================================================
+/* =========================================================
    EVOLUÇÃO
-===================================================== */
+========================================================= */
 
 .evolucao {
-    width: 100%;
+    margin-top: 18px;
 
-    margin-top: 28px;
-
-    padding: 21px;
+    padding: 22px;
 
     border:
-        1px solid rgba(50, 100, 180, .15);
+        1px solid rgba(150, 70, 255, .17);
 
-    border-radius: 17px;
+    border-radius: var(--radius);
 
     background:
-        rgba(8, 14, 27, .78);
+        rgba(12, 7, 22, .85);
 }
-
 
 .evolucao h3 {
-    margin: 10px 0 22px;
+    margin: 12px 0 20px;
 
-    font-size: 20px;
+    font-size: 21px;
 }
-
 
 .progresso {
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
 
-    gap: 9px;
+    gap: 8px;
 }
 
-
 .progresso div {
-    padding: 13px;
+    padding: 14px;
 
-    border-radius: 9px;
+    border:
+        1px solid rgba(150, 70, 255, .1);
+
+    border-radius: 10px;
 
     background:
-        rgba(24, 45, 80, .3);
+        rgba(35, 16, 59, .35);
 
-    color: #8190aa;
+    color: #8d8299;
 
-    font-size: 7px;
-
+    font-size: 8px;
     font-weight: 800;
 
     letter-spacing: 1px;
 }
 
-
 .progresso span {
     display: block;
 
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 
-    color: var(--blue2);
+    color: var(--purple-light);
 
     font-size: 16px;
 }
 
 
-/* =====================================================
-   OBJETIVO
-===================================================== */
-
-.objetivo {
-    position: relative;
-
-    width: 100%;
-
-    overflow: hidden;
-
-    padding: 85px 20px;
-
-    text-align: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(0, 102, 255, .17),
-            transparent 55%
-        );
-}
-
-
-.objetivo h2 {
-    margin: 17px 0;
-
-    font-size: clamp(37px, 11vw, 65px);
-
-    line-height: .9;
-}
-
-
-.objetivo strong {
-    color: var(--blue2);
-}
-
-
-.objetivo p {
-    margin-bottom: 23px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-
-.objetivo .botao {
-    width: 100%;
-
-    max-width: 330px;
-
-    margin: auto;
-}
-
-
-/* =====================================================
-   INSTAGRAM
-===================================================== */
-
-.instagram {
-    width: calc(100% - 30px);
-
-    max-width: 500px;
-
-    margin: 35px auto 70px;
-
-    padding: 50px 18px;
-
-    text-align: center;
-
-    border:
-        1px solid rgba(40, 110, 230, .22);
-
-    border-radius: 22px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(0, 102, 255, .12),
-            transparent 58%
-        ),
-        rgba(8, 14, 28, .78);
-
-    box-shadow:
-        0 25px 70px rgba(0, 0, 0, .35);
-}
-
-
-.instagram p {
-    max-width: 330px;
-
-    margin: 18px auto 23px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    line-height: 1.7;
-}
-
-
-.instagram-botao {
-    width: 100%;
-
-    max-width: 300px;
-
-    margin: auto;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer {
-    width: 100%;
-
-    padding: 38px 20px;
-
-    text-align: center;
-
-    border-top:
-        1px solid rgba(50, 100, 180, .1);
-}
-
-
-.footer-logo {
-    font-size: 24px;
-
-    font-weight: 900;
-}
-
-
-.footer-logo span {
-    color: var(--blue2);
-}
-
-
-footer p {
-    margin: 9px 0;
-
-    color: #53627c;
-
-    font-size: 7px;
-
-    letter-spacing: 2.5px;
-}
-
-
-footer > span {
-    color: #38445a;
-
-    font-size: 7px;
-}
-
-
-/* =====================================================
-   ANIMAÇÕES
-===================================================== */
-
-@keyframes respirar {
-
-    0%,
-    100% {
-        transform: scale(1);
-
-        opacity: .7;
-    }
-
-    50% {
-        transform: scale(1.12);
-
-        opacity: 1;
-    }
-}
-
-
-@keyframes girar {
-
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
-@keyframes particulas {
-
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-80px);
-    }
-}
-
-
-/* =====================================================
-   SAÍDA DA ENTRADA
-===================================================== */
-
-#entrada.saida {
-    animation:
-        desaparecerEntrada
-        .8s ease forwards;
-}
-
-
-@keyframes desaparecerEntrada {
-
-    0% {
-        opacity: 1;
-
-        transform: scale(1);
-    }
-
-    60% {
-        opacity: 1;
-
-        transform: scale(1.03);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform: scale(1.08);
-    }
-}
-
-
-/* =====
+/* ==========================
