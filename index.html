@@ -3,623 +3,613 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
 
     <title>PITER | Luta • Treino • Evolução</title>
 
-    <meta name="description"
-        content="PITER — luta, treino, disciplina e evolução.">
+    <meta
+        name="description"
+        content="PITER — luta, treino, disciplina e evolução."
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =====================================================
-         TELA DE ENTRADA
-    ====================================================== -->
 
-    <div id="entrada">
+<!-- =====================================================
+     TELA INICIAL
+===================================================== -->
 
-        <div class="entrada-bg"></div>
+<div id="entrada">
 
-        <div class="entrada-particulas"></div>
+    <!-- FUNDO -->
+    <div class="entrada-fundo"></div>
 
-        <div class="entrada-conteudo">
+    <!-- PARTICULAS -->
+    <div class="particulas"></div>
 
-            <span class="mini-titulo">
-                LUTADOR • ATLETA • EVOLUÇÃO
-            </span>
+    <!-- IMAGEM DO SASUKE -->
+    <div class="sasuke-container">
 
-            <div class="linha"></div>
+        <img
+            src="imagens/sasuke.jpg"
+            alt="Sasuke"
+            class="sasuke-imagem"
+        >
 
-            <h1>
-                PITER<span>.</span>
-            </h1>
-
-            <p>
-                FORÇA.<br>
-                DISCIPLINA.<br>
-                EVOLUÇÃO.
-            </p>
-
-            <button onclick="entrarNoSite()" class="btn-entrada">
-                <span>ENTRAR NO MEU MUNDO</span>
-                <b>→</b>
-            </button>
-
-        </div>
-
-        <div class="entrada-aviso">
-            SCROLL PARA EXPLORAR
-        </div>
+        <div class="sasuke-brilho"></div>
 
     </div>
 
 
-    <!-- =====================================================
-         SITE
-    ====================================================== -->
-
-    <div id="site">
+    <!-- ESCURECIMENTO -->
+    <div class="entrada-overlay"></div>
 
 
-        <!-- =================================================
-             MENU
-        ================================================== -->
+    <!-- CONTEÚDO -->
+    <div class="entrada-conteudo">
 
-        <header class="topo">
+        <span class="entrada-mini">
+            SHINOBI • LUTADOR • EVOLUÇÃO
+        </span>
 
-            <a href="#inicio" class="logo">
-                PITER<span>.</span>
-            </a>
+        <h1>
+            PITER<span>.</span>
+        </h1>
 
-            <nav>
+        <p>
+            FORÇA<br>
+            DISCIPLINA<br>
+            EVOLUÇÃO
+        </p>
 
-                <a href="#inicio">INÍCIO</a>
-                <a href="#lutas">LUTAS</a>
-                <a href="#historia">HISTÓRIA</a>
-                <a href="#treino">TREINO</a>
-                <a href="#instagram">INSTAGRAM</a>
+        <button
+            class="btn-entrar"
+            onclick="entrarNoSite()"
+        >
+            <span>ENTRAR NO MEU MUNDO</span>
+            <b>↗</b>
+        </button>
 
-            </nav>
-
-        </header>
-
-
-        <!-- =================================================
-             HERO
-        ================================================== -->
-
-        <main>
-
-            <section id="inicio" class="hero">
-
-                <div class="hero-overlay"></div>
-
-                <div class="hero-conteudo">
-
-                    <span class="categoria">
-                        // BEM-VINDO AO MEU MUNDO
-                    </span>
-
-                    <h2>
-                        PITER
-                    </h2>
-
-                    <div class="hero-linha"></div>
-
-                    <h3>
-                        LUTA • TREINO • EVOLUÇÃO
-                    </h3>
-
-                    <p>
-                        Uma jornada construída através de
-                        disciplina, esforço e determinação.
-                    </p>
-
-                    <div class="hero-botoes">
-
-                        <a href="#lutas" class="botao principal">
-                            VER LUTAS
-                            <span>↗</span>
-                        </a>
-
-                        <a href="#historia" class="botao secundario">
-                            MINHA HISTÓRIA
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <div class="hero-numero">
-                    01
-                </div>
-
-            </section>
+    </div>
 
 
-            <!-- =================================================
-                 FRASE
-            ================================================== -->
+    <div class="entrada-indicador">
+        DESLIZE PARA EXPLORAR
+    </div>
 
-            <section class="frase">
+</div>
 
-                <span>“</span>
+
+
+<!-- =====================================================
+     SITE PRINCIPAL
+===================================================== -->
+
+<div id="site">
+
+
+    <!-- =================================================
+         TOPO
+    ================================================== -->
+
+    <header class="topo">
+
+        <a
+            href="#inicio"
+            class="logo"
+        >
+            PITER<span>.</span>
+        </a>
+
+
+        <a
+            href="#instagram"
+            class="instagram-topo"
+        >
+            INSTAGRAM ↗
+        </a>
+
+    </header>
+
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <main>
+
+        <section
+            id="inicio"
+            class="hero"
+        >
+
+            <div class="hero-conteudo">
+
+                <span class="categoria">
+                    // BEM-VINDO
+                </span>
 
                 <h2>
-                    NÃO É SOBRE SER<br>
-                    PERFEITO.
-                    <strong>É SOBRE EVOLUIR.</strong>
+                    PITER
                 </h2>
 
-                <div class="frase-linha"></div>
+                <div class="linha-roxa"></div>
 
-            </section>
+                <h3>
+                    LUTA • TREINO • EVOLUÇÃO
+                </h3>
+
+                <p>
+                    Minha jornada através da luta,
+                    disciplina e vontade de evoluir.
+                </p>
 
 
-            <!-- =================================================
-                 LUTAS
-            ================================================== -->
+                <div class="hero-botoes">
 
-            <section id="lutas" class="secao">
+                    <a
+                        href="#lutas"
+                        class="botao principal"
+                    >
+                        VER LUTAS
+                        <span>↗</span>
+                    </a>
 
-                <div class="titulo-secao">
-
-                    <div>
-                        <span class="categoria">
-                            01 / CONFRONTOS
-                        </span>
-
-                        <h2>
-                            LUTAS<span>.</span>
-                        </h2>
-
-                        <p>
-                            Confrontos que representam força,
-                            determinação e inspiração.
-                        </p>
-                    </div>
-
-                    <span class="numero-secao">
-                        01
-                    </span>
+                    <a
+                        href="#treino"
+                        class="botao secundario"
+                    >
+                        MEU TREINO
+                    </a>
 
                 </div>
 
+            </div>
 
-                <div class="lutas-container">
 
+            <div class="hero-numero">
+                01
+            </div>
 
-                    <!-- LUTA 1 -->
+        </section>
 
-                    <article class="luta-card destaque">
 
-                        <div class="luta-imagem">
 
-                            <img
-                                src="images%20(2).jpeg"
-                                alt="Akaza">
+        <!-- =================================================
+             FRASE
+        ================================================== -->
 
-                            <div class="imagem-overlay"></div>
+        <section class="frase">
 
-                            <span class="luta-numero">
-                                01
-                            </span>
+            <span class="aspas">
+                “
+            </span>
 
-                        </div>
+            <h2>
+                NÃO É SOBRE<br>
+                SER PERFEITO.
+            </h2>
 
-                        <div class="luta-conteudo">
+            <strong>
+                É SOBRE EVOLUIR.
+            </strong>
 
-                            <span class="anime">
-                                DEMON SLAYER
-                            </span>
+            <div class="linha-roxa pequena"></div>
 
-                            <h3>
-                                TANJIRO
-                                <span>VS</span>
-                                AKAZA
-                            </h3>
+        </section>
 
-                            <p>
-                                Uma batalha marcada por
-                                determinação, força e emoção.
-                            </p>
 
-                            <div class="video-box">
 
-                                <video controls preload="metadata">
-                                    <source
-                                        src="K7VZK5ACXH.mp4"
-                                        type="video/mp4">
-                                </video>
+        <!-- =================================================
+             LUTAS
+        ================================================== -->
 
-                            </div>
+        <section
+            id="lutas"
+            class="secao"
+        >
 
-                        </div>
+            <div class="titulo">
 
-                    </article>
+                <span class="categoria">
+                    01 / CONFRONTOS
+                </span>
 
+                <h2>
+                    LUTAS<span>.</span>
+                </h2>
 
-                    <!-- LUTA 2 -->
+                <p>
+                    Batalhas que me inspiram.
+                </p>
 
-                    <article class="luta-card">
+            </div>
 
-                        <div class="luta-imagem">
 
-                            <img
-                                src="images%20(3).jpeg"
-                                alt="Asta">
 
-                            <div class="imagem-overlay"></div>
+            <div class="lutas-container">
 
-                            <span class="luta-numero">
-                                02
-                            </span>
 
-                        </div>
+                <!-- LUTA 1 -->
 
-                        <div class="luta-conteudo">
+                <article class="luta-card destaque">
 
-                            <span class="anime">
-                                BLACK CLOVER
-                            </span>
+                    <div class="luta-imagem">
 
-                            <h3>
-                                ASTA
-                                <span>VS</span>
-                                REI MAGO
-                            </h3>
+                        <img
+                            src="imagens/images (2).jpeg"
+                            alt="Tanjiro vs Akaza"
+                        >
 
-                            <p>
-                                Poder, determinação e vontade
-                                de superar qualquer limite.
-                            </p>
+                        <div class="imagem-overlay"></div>
 
-                            <button class="botao luta-botao">
-                                EM BREVE
-                            </button>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 HISTÓRIA
-            ================================================== -->
-
-            <section id="historia" class="secao historia">
-
-                <div class="titulo-secao">
-
-                    <div>
-
-                        <span class="categoria">
-                            02 / MINHA JORNADA
-                        </span>
-
-                        <h2>
-                            MINHA<br>
-                            HISTÓRIA<span>.</span>
-                        </h2>
-
-                    </div>
-
-                    <span class="numero-secao">
-                        02
-                    </span>
-
-                </div>
-
-
-                <div class="historia-grid">
-
-                    <div class="historia-frase">
-
-                        <span>
-                            TUDO COMEÇA
-                        </span>
-
-                        <h3>
-                            QUANDO VOCÊ<br>
-                            DECIDE NÃO<br>
-                            DESISTIR.
-                        </h3>
-
-                    </div>
-
-
-                    <div class="historia-texto">
-
-                        <p>
-                            Tudo começou quando decidi que
-                            queria mudar e me tornar mais forte.
-                        </p>
-
-                        <p>
-                            Nem sempre tive apoio das pessoas
-                            ao meu redor. Mesmo assim, escolhi
-                            continuar.
-                        </p>
-
-                        <p>
-                            Cada treino, cada dificuldade e
-                            cada momento difícil fazem parte
-                            da pessoa que estou me tornando.
-                        </p>
-
-                        <div class="historia-final">
-
-                            <span>
-                                AINDA NÃO TERMINEI.
-                            </span>
-
-                            <b>→</b>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 TREINO
-            ================================================== -->
-
-            <section id="treino" class="secao treino">
-
-                <div class="titulo-secao">
-
-                    <div>
-
-                        <span class="categoria">
-                            03 / DISCIPLINA
-                        </span>
-
-                        <h2>
-                            TREINO<span>.</span>
-                        </h2>
-
-                        <p>
-                            Todo resultado começa quando
-                            ninguém está olhando.
-                        </p>
-
-                    </div>
-
-                    <span class="numero-secao">
-                        03
-                    </span>
-
-                </div>
-
-
-                <div class="treino-grid">
-
-
-                    <article class="treino-card">
-
-                        <span class="treino-anime">
-                            BLACK CLOVER
-                        </span>
-
-                        <div class="treino-icon">
-                            ⚔
-                        </div>
-
-                        <h3>
-                            DISCIPLINA
-                        </h3>
-
-                        <p>
-                            Continuar avançando mesmo quando
-                            parece impossível.
-                        </p>
-
-                        <span class="treino-numero">
+                        <span class="luta-numero">
                             01
                         </span>
 
-                    </article>
+                    </div>
 
 
-                    <article class="treino-card">
+                    <div class="luta-conteudo">
 
-                        <span class="treino-anime">
-                            HAJIME NO IPPO
+                        <span class="anime">
+                            DEMON SLAYER
                         </span>
 
-                        <div class="treino-icon">
-                            🥊
-                        </div>
-
                         <h3>
-                            EVOLUÇÃO
+                            TANJIRO
+                            <span>VS</span>
+                            AKAZA
                         </h3>
 
                         <p>
-                            Treinar, aprender, cair e levantar
-                            ainda mais forte.
+                            Uma batalha marcada por
+                            força, determinação e emoção.
                         </p>
 
-                        <span class="treino-numero">
-                            02
-                        </span>
 
-                    </article>
+                        <div class="video-box">
 
+                            <video
+                                controls
+                                preload="metadata"
+                                playsinline
+                            >
 
-                    <article class="treino-card">
+                                <source
+                                    src="K7VZK5ACXH.mp4"
+                                    type="video/mp4"
+                                >
 
-                        <span class="treino-anime">
-                            MINHA ROTINA
-                        </span>
+                            </video>
 
-                        <div class="treino-icon">
-                            ⚡
-                        </div>
-
-                        <h3>
-                            CONSISTÊNCIA
-                        </h3>
-
-                        <p>
-                            Pequenas melhorias todos os dias
-                            constroem grandes resultados.
-                        </p>
-
-                        <span class="treino-numero">
-                            03
-                        </span>
-
-                    </article>
-
-                </div>
-
-
-                <!-- EVOLUÇÃO -->
-
-                <div class="evolucao">
-
-                    <span class="categoria">
-                        SISTEMA DE EVOLUÇÃO
-                    </span>
-
-                    <h3>
-                        CADA DIA MAIS FORTE.
-                    </h3>
-
-                    <div class="progresso">
-
-                        <div>
-                            <span>01</span>
-                            COMEÇO
-                        </div>
-
-                        <div>
-                            <span>02</span>
-                            DISCIPLINA
-                        </div>
-
-                        <div>
-                            <span>03</span>
-                            CONSISTÊNCIA
-                        </div>
-
-                        <div>
-                            <span>04</span>
-                            EVOLUÇÃO
                         </div>
 
                     </div>
 
-                </div>
-
-            </section>
+                </article>
 
 
-            <!-- =================================================
-                 OBJETIVO
-            ================================================== -->
 
-            <section class="objetivo">
+                <!-- LUTA 2 -->
 
-                <span class="categoria">
-                    // PRÓXIMO NÍVEL
-                </span>
+                <article class="luta-card">
 
-                <h2>
-                    A JORNADA<br>
-                    <strong>CONTINUA.</strong>
-                </h2>
+                    <div class="luta-imagem">
 
-                <p>
-                    Ainda existem muitos limites para quebrar.
-                </p>
+                        <img
+                            src="imagens/images (3).jpeg"
+                            alt="Asta"
+                        >
 
-                <a href="#instagram" class="botao principal">
-                    ACOMPANHAR EVOLUÇÃO
-                    <span>↗</span>
-                </a>
+                        <div class="imagem-overlay"></div>
 
-            </section>
+                        <span class="luta-numero">
+                            02
+                        </span>
+
+                    </div>
 
 
-            <!-- =================================================
-                 INSTAGRAM
-            ================================================== -->
+                    <div class="luta-conteudo">
 
-            <section id="instagram" class="instagram">
+                        <span class="anime">
+                            BLACK CLOVER
+                        </span>
 
-                <span class="categoria">
-                    04 / CONECTE-SE
-                </span>
+                        <h3>
+                            ASTA
+                            <span>VS</span>
+                            REI MAGO
+                        </h3>
 
-                <h2>
-                    ACOMPANHE<br>
-                    MINHA JORNADA<span>.</span>
-                </h2>
+                        <p>
+                            Poder, coragem e vontade
+                            de superar qualquer limite.
+                        </p>
 
-                <p>
-                    Treinos, evolução, lutas e os próximos
-                    capítulos dessa jornada.
-                </p>
 
-                <a
-                    href="https://instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="botao instagram-botao">
+                        <button
+                            class="botao luta-botao"
+                            type="button"
+                        >
+                            EM BREVE
+                        </button>
 
-                    INSTAGRAM
-                    <span>↗</span>
+                    </div>
 
-                </a>
+                </article>
 
-            </section>
+            </div>
 
-        </main>
+        </section>
+
 
 
         <!-- =================================================
-             RODAPÉ
+             SOBRE
         ================================================== -->
 
-        <footer>
+        <section
+            id="historia"
+            class="secao sobre"
+        >
 
-            <div class="footer-logo">
-                PITER<span>.</span>
+            <div class="titulo">
+
+                <span class="categoria">
+                    02 / SOBRE MIM
+                </span>
+
+                <h2>
+                    QUEM É<br>
+                    PITER<span>.</span>
+                </h2>
+
             </div>
 
-            <p>
-                LUTA • TREINO • EVOLUÇÃO
-            </p>
 
-            <span>
-                © 2026 PITER
+            <div class="sobre-card">
+
+                <span>
+                    MINHA JORNADA
+                </span>
+
+                <p>
+                    Estou construindo minha própria
+                    história através do treino, da luta
+                    e da disciplina.
+                </p>
+
+                <p>
+                    Cada treino é uma oportunidade
+                    para ficar melhor do que ontem.
+                </p>
+
+                <strong>
+                    A JORNADA ESTÁ SÓ COMEÇANDO.
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TREINO
+        ================================================== -->
+
+        <section
+            id="treino"
+            class="secao treino"
+        >
+
+            <div class="titulo">
+
+                <span class="categoria">
+                    03 / DISCIPLINA
+                </span>
+
+                <h2>
+                    TREINO<span>.</span>
+                </h2>
+
+                <p>
+                    O resultado começa quando ninguém
+                    está olhando.
+                </p>
+
+            </div>
+
+
+
+            <div class="treino-grid">
+
+
+                <article class="treino-card">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div class="treino-icon">
+                        ⚔
+                    </div>
+
+                    <h3>
+                        DISCIPLINA
+                    </h3>
+
+                    <p>
+                        Continuar mesmo quando fica difícil.
+                    </p>
+
+                </article>
+
+
+
+                <article class="treino-card">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div class="treino-icon">
+                        🥊
+                    </div>
+
+                    <h3>
+                        EVOLUÇÃO
+                    </h3>
+
+                    <p>
+                        Treinar, aprender e melhorar.
+                    </p>
+
+                </article>
+
+
+
+                <article class="treino-card">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div class="treino-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        CONSISTÊNCIA
+                    </h3>
+
+                    <p>
+                        Pequenos avanços todos os dias.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             OBJETIVO
+        ================================================== -->
+
+        <section class="objetivo">
+
+            <span class="categoria">
+                // PRÓXIMO NÍVEL
             </span>
 
-        </footer>
+            <h2>
+                A JORNADA<br>
+                <strong>CONTINUA.</strong>
+            </h2>
+
+            <p>
+                Ainda existem muitos limites para quebrar.
+            </p>
+
+        </section>
 
 
-    </div>
+
+        <!-- =================================================
+             INSTAGRAM
+        ================================================== -->
+
+        <section
+            id="instagram"
+            class="instagram"
+        >
+
+            <div class="instagram-icon">
+                ◎
+            </div>
+
+            <span class="categoria">
+                04 / REDES SOCIAIS
+            </span>
+
+            <h2>
+                ME<br>
+                ACOMPANHE<span>.</span>
+            </h2>
+
+            <p>
+                Treinos, lutas, evolução
+                e os próximos capítulos.
+            </p>
 
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+            <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="instagram-botao"
+            >
 
-    <script src="script.js"></script>
+                <span>
+                    INSTAGRAM
+                </span>
+
+                <b>
+                    ↗
+                </b>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =================================================
+         RODAPÉ
+    ================================================== -->
+
+    <footer>
+
+        <div class="footer-logo">
+            PITER<span>.</span>
+        </div>
+
+        <p>
+            LUTA • TREINO • EVOLUÇÃO
+        </p>
+
+        <span>
+            © 2026 PITER
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="script.js"></script>
 
 </body>
 
-                            </html>
+    </html>
