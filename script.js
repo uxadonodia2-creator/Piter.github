@@ -1,7 +1,21 @@
 /* =====================================================
-   PITER — SCRIPT
-   DARK MODE • NEVE • MAGIA • ANIMAÇÕES
+   PITER — SCRIPT DEFINITIVO
+   SASUKE • DARK • ROXO • MOBILE
 ===================================================== */
+
+"use strict";
+
+
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
+
+const PITER = {
+    roxo: "#9b4dff",
+    roxoClaro: "#c084ff",
+    roxoForte: "#6d20ff",
+    branco: "#ffffff"
+};
 
 
 /* =====================================================
@@ -11,85 +25,93 @@
 function entrarNoSite() {
 
     const entrada = document.getElementById("entrada");
+    const site = document.getElementById("site");
 
-    if (!entrada) return;
+    if (!entrada || !site) return;
+
+    // Evita clicar várias vezes
+    if (entrada.classList.contains("saida")) return;
 
     entrada.classList.add("saida");
 
-    // Explosão visual ao entrar
-    criarExplosaoMagica();
+    criarExplosaoRoxa();
 
     setTimeout(() => {
 
         entrada.style.display = "none";
+        site.style.display = "block";
 
-        const site = document.getElementById("site");
-
-        if (site) {
-            site.style.display = "block";
-        }
+        // Pequeno reset para garantir que o navegador
+        // renderize o site corretamente
+        requestAnimationFrame(() => {
+            site.classList.add("site-visivel");
+        });
 
         iniciarEfeitos();
 
-    }, 800);
+    }, 750);
 }
 
 
 /* =====================================================
-   PARTÍCULAS DA ENTRADA
+   PARTÍCULAS ROXAS
 ===================================================== */
 
-function criarParticulas() {
+function criarParticulasRoxas() {
 
     const entrada = document.getElementById("entrada");
 
     if (!entrada) return;
 
+    // Não cria duas vezes
+    if (entrada.querySelector(".particulas-roxas")) return;
+
     const camada = document.createElement("div");
 
-    camada.className = "particulas-magicas";
+    camada.className = "particulas-roxas";
 
-    camada.style.position = "absolute";
-    camada.style.inset = "0";
-    camada.style.pointerEvents = "none";
-    camada.style.overflow = "hidden";
-    camada.style.zIndex = "1";
+    Object.assign(camada.style, {
+        position: "absolute",
+        inset: "0",
+        overflow: "hidden",
+        pointerEvents: "none",
+        zIndex: "1"
+    });
 
     entrada.appendChild(camada);
 
-    const quantidade = window.innerWidth < 600 ? 35 : 65;
+    const celular = window.innerWidth <= 600;
+
+    // Menos partículas no celular para manter o site leve
+    const quantidade = celular ? 28 : 55;
 
     for (let i = 0; i < quantidade; i++) {
 
         const particula = document.createElement("span");
 
-        particula.style.position = "absolute";
-        particula.style.left = Math.random() * 100 + "%";
-        particula.style.top = Math.random() * 100 + "%";
+        const tamanho =
+            Math.random() * 3 + 1;
 
-        const tamanho = Math.random() * 3 + 1;
-
-        particula.style.width = tamanho + "px";
-        particula.style.height = tamanho + "px";
-
-        particula.style.borderRadius = "50%";
-
-        particula.style.background =
-            Math.random() > 0.5
-                ? "#00b7ff"
-                : "#ffffff";
-
-        particula.style.boxShadow =
-            "0 0 10px #00b7ff";
-
-        particula.style.opacity =
-            Math.random() * 0.7 + 0.2;
-
-        particula.style.animation =
-            `flutuar ${Math.random() * 5 + 4}s ease-in-out infinite`;
-
-        particula.style.animationDelay =
-            Math.random() * 5 + "s";
+        Object.assign(particula.style, {
+            position: "absolute",
+            left: Math.random() * 100 + "%",
+            top: Math.random() * 100 + "%",
+            width: tamanho + "px",
+            height: tamanho + "px",
+            borderRadius: "50%",
+            background:
+                Math.random() > 0.25
+                    ? PITER.roxo
+                    : PITER.roxoClaro,
+            boxShadow:
+                `0 0 ${Math.random() * 12 + 6}px ${PITER.roxo}`,
+            opacity:
+                Math.random() * 0.65 + 0.2,
+            animation:
+                `piterFlutuar ${Math.random() * 5 + 5}s ease-in-out infinite`,
+            animationDelay:
+                Math.random() * 5 + "s"
+        });
 
         camada.appendChild(particula);
     }
@@ -97,146 +119,87 @@ function criarParticulas() {
 
 
 /* =====================================================
-   FLOQUINHOS DE NEVE
+   ORB ROXO
 ===================================================== */
 
-function criarNeve() {
+function criarOrbRoxo() {
 
     const entrada = document.getElementById("entrada");
 
     if (!entrada) return;
 
-    const neve = document.createElement("div");
+    if (entrada.querySelector(".orb-piter")) return;
 
-    neve.className = "neve-piter";
+    const orb = document.createElement("div");
 
-    neve.style.position = "absolute";
-    neve.style.inset = "0";
-    neve.style.overflow = "hidden";
-    neve.style.pointerEvents = "none";
-    neve.style.zIndex = "1";
+    orb.className = "orb-piter";
 
-    entrada.appendChild(neve);
+    Object.assign(orb.style, {
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "35px",
+        height: "35px",
+        transform: "translate(-50%, -50%)",
+        borderRadius: "50%",
+        pointerEvents: "none",
+        zIndex: "0",
+        background:
+            "radial-gradient(circle, rgba(192,132,255,.65), rgba(109,32,255,.12) 45%, transparent 72%)",
+        boxShadow:
+            "0 0 45px rgba(155,77,255,.65), 0 0 120px rgba(109,32,255,.35)",
+        animation:
+            "piterOrb 4s ease-in-out infinite"
+    });
 
-    const quantidade =
-        window.innerWidth < 600 ? 28 : 50;
+    entrada.appendChild(orb);
+}
+
+
+/* =====================================================
+   EXPLOSÃO ROXA AO ENTRAR
+===================================================== */
+
+function criarExplosaoRoxa() {
+
+    const entrada = document.getElementById("entrada");
+
+    if (!entrada) return;
+
+    const celular = window.innerWidth <= 600;
+
+    // Menos partículas no celular
+    const quantidade = celular ? 24 : 38;
 
     for (let i = 0; i < quantidade; i++) {
 
-        const floco = document.createElement("span");
-
-        floco.innerHTML = "❄";
-
-        floco.style.position = "absolute";
-
-        floco.style.left =
-            Math.random() * 100 + "%";
-
-        floco.style.top =
-            -Math.random() * 100 + "%";
-
-        floco.style.color =
-            "rgba(255,255,255," +
-            (Math.random() * 0.6 + 0.2) +
-            ")";
-
-        floco.style.fontSize =
-            Math.random() * 10 + 6 + "px";
-
-        floco.style.filter =
-            "drop-shadow(0 0 5px #ffffff)";
-
-        floco.style.animation =
-            `cairNeve ${Math.random() * 8 + 7}s linear infinite`;
-
-        floco.style.animationDelay =
-            Math.random() * 8 + "s";
-
-        neve.appendChild(floco);
-    }
-}
-
-
-/* =====================================================
-   MAGIA NEGRA
-===================================================== */
-
-function criarMagiaNegra() {
-
-    const entrada = document.getElementById("entrada");
-
-    if (!entrada) return;
-
-    const magia = document.createElement("div");
-
-    magia.className = "magia-negra";
-
-    magia.style.position = "absolute";
-    magia.style.left = "50%";
-    magia.style.top = "50%";
-
-    magia.style.width = "20px";
-    magia.style.height = "20px";
-
-    magia.style.transform = "translate(-50%, -50%)";
-
-    magia.style.borderRadius = "50%";
-
-    magia.style.pointerEvents = "none";
-
-    magia.style.zIndex = "0";
-
-    magia.style.boxShadow = `
-        0 0 40px rgba(0,119,255,.7),
-        0 0 100px rgba(0,119,255,.35)
-    `;
-
-    magia.style.animation =
-        "magiaRespirar 4s ease-in-out infinite";
-
-    entrada.appendChild(magia);
-}
-
-
-/* =====================================================
-   EXPLOSÃO AO ENTRAR
-===================================================== */
-
-function criarExplosaoMagica() {
-
-    const entrada = document.getElementById("entrada");
-
-    if (!entrada) return;
-
-    for (let i = 0; i < 35; i++) {
-
         const particula = document.createElement("span");
 
-        particula.style.position = "absolute";
+        const tamanho =
+            Math.random() * 4 + 2;
 
-        particula.style.left = "50%";
-        particula.style.top = "50%";
-
-        particula.style.width = "4px";
-        particula.style.height = "4px";
-
-        particula.style.borderRadius = "50%";
-
-        particula.style.background =
-            i % 2 === 0
-                ? "#00b7ff"
-                : "#ffffff";
-
-        particula.style.boxShadow =
-            "0 0 12px #00b7ff";
-
-        particula.style.pointerEvents = "none";
+        Object.assign(particula.style, {
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            width: tamanho + "px",
+            height: tamanho + "px",
+            borderRadius: "50%",
+            background:
+                i % 3 === 0
+                    ? PITER.branco
+                    : PITER.roxoClaro,
+            boxShadow:
+                `0 0 12px ${PITER.roxo}`,
+            pointerEvents: "none",
+            zIndex: "20"
+        });
 
         const angulo =
             Math.random() * Math.PI * 2;
 
         const distancia =
-            Math.random() * 250 + 100;
+            Math.random() * (celular ? 160 : 280) + 70;
 
         const x =
             Math.cos(angulo) * distancia;
@@ -245,132 +208,143 @@ function criarExplosaoMagica() {
             Math.sin(angulo) * distancia;
 
         particula.animate(
-
             [
                 {
                     transform:
                         "translate(-50%, -50%) scale(1)",
                     opacity: 1
                 },
-
                 {
                     transform:
-                        `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(0)`,
+                        `translate(
+                            calc(-50% + ${x}px),
+                            calc(-50% + ${y}px)
+                        ) scale(0)`,
                     opacity: 0
                 }
             ],
-
             {
-                duration: 900,
-                easing: "cubic-bezier(.1,.8,.2,1)"
+                duration:
+                    Math.random() * 400 + 650,
+                easing:
+                    "cubic-bezier(.1,.8,.2,1)",
+                fill: "forwards"
             }
-
         );
 
         entrada.appendChild(particula);
 
         setTimeout(() => {
             particula.remove();
-        }, 1000);
+        }, 1200);
     }
 }
 
 
 /* =====================================================
-   ANIMAÇÕES CSS CRIADAS PELO JAVASCRIPT
+   ANIMAÇÕES EXTRAS
 ===================================================== */
 
 function adicionarAnimacoes() {
 
-    if (document.getElementById("piter-animations")) return;
+    if (document.getElementById("piter-js-animations")) {
+        return;
+    }
 
-    const style = document.createElement("style");
+    const style =
+        document.createElement("style");
 
-    style.id = "piter-animations";
+    style.id =
+        "piter-js-animations";
 
     style.textContent = `
 
-        @keyframes flutuar {
+        /* -------------------------------
+           PARTÍCULAS
+        -------------------------------- */
 
-            0%, 100% {
-                transform: translate(0, 0);
-                opacity: .2;
-            }
-
-            50% {
-                transform: translate(
-                    20px,
-                    -30px
-                );
-                opacity: 1;
-            }
-
-        }
-
-
-        @keyframes cairNeve {
+        @keyframes piterFlutuar {
 
             0% {
                 transform:
-                    translateY(-20px)
-                    rotate(0deg);
+                    translate3d(0, 0, 0)
+                    scale(.7);
+                opacity: .15;
             }
 
             50% {
                 transform:
-                    translateY(50vh)
-                    translateX(25px)
-                    rotate(180deg);
+                    translate3d(
+                        12px,
+                        -25px,
+                        0
+                    )
+                    scale(1.15);
+                opacity: 1;
             }
 
             100% {
                 transform:
-                    translateY(110vh)
-                    translateX(-20px)
-                    rotate(360deg);
-            }
-
-        }
-
-
-        @keyframes magiaRespirar {
-
-            0%, 100% {
-                transform:
-                    translate(-50%, -50%)
-                    scale(1);
-                opacity: .5;
-            }
-
-            50% {
-                transform:
-                    translate(-50%, -50%)
-                    scale(18);
+                    translate3d(
+                        -8px,
+                        -50px,
+                        0
+                    )
+                    scale(.7);
                 opacity: .15;
             }
 
         }
 
 
-        #entrada.saida {
+        /* -------------------------------
+           ORB
+        -------------------------------- */
 
-            animation:
-                desaparecerEntrada
-                .8s ease forwards;
+        @keyframes piterOrb {
+
+            0%, 100% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+                opacity: .45;
+            }
+
+            50% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(13);
+                opacity: .12;
+            }
 
         }
 
 
-        @keyframes desaparecerEntrada {
+        /* -------------------------------
+           SAÍDA
+        -------------------------------- */
+
+        #entrada.saida {
+
+            animation:
+                piterEntradaSaida
+                .75s
+                cubic-bezier(.7,0,.2,1)
+                forwards;
+
+        }
+
+
+        @keyframes piterEntradaSaida {
 
             0% {
                 opacity: 1;
                 transform: scale(1);
             }
 
-            60% {
+            55% {
                 opacity: 1;
-                transform: scale(1.03);
+                transform: scale(1.025);
             }
 
             100% {
@@ -381,27 +355,140 @@ function adicionarAnimacoes() {
         }
 
 
-        .efeito-brilho-piter {
+        /* -------------------------------
+           SITE
+        -------------------------------- */
+
+        #site.site-visivel {
+
+            animation:
+                piterSiteEntrada
+                .7s
+                ease
+                both;
+
+        }
+
+
+        @keyframes piterSiteEntrada {
+
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* -------------------------------
+           BRILHO DE TOQUE
+        -------------------------------- */
+
+        .piter-toque {
 
             position: fixed;
-            pointer-events: none;
 
-            width: 150px;
-            height: 150px;
+            width: 85px;
+            height: 85px;
 
             border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 99999;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(0,183,255,.18),
-                    transparent 70%
+                    rgba(192,132,255,.45),
+                    rgba(155,77,255,.16) 35%,
+                    transparent 72%
                 );
 
             transform:
-                translate(-50%, -50%);
+                translate(-50%, -50%)
+                scale(.4);
 
-            z-index: 9998;
+            animation:
+                piterToque
+                .65s
+                ease-out
+                forwards;
+
+        }
+
+
+        @keyframes piterToque {
+
+            0% {
+                opacity: .9;
+                transform:
+                    translate(-50%, -50%)
+                    scale(.35);
+            }
+
+            100% {
+                opacity: 0;
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.5);
+            }
+
+        }
+
+
+        /* -------------------------------
+           LINHA DE SCROLL
+        -------------------------------- */
+
+        .piter-scroll-progress {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 0%;
+            height: 2px;
+
+            z-index: 10000;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6d20ff,
+                    #c084ff
+                );
+
+            box-shadow:
+                0 0 12px rgba(155,77,255,.8);
+
+        }
+
+
+        /* -------------------------------
+           REDUZIR MOVIMENTO
+        -------------------------------- */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .particulas-roxas,
+            .orb-piter {
+                display: none !important;
+            }
+
+            #entrada.saida,
+            #site.site-visivel,
+            .piter-toque {
+                animation: none !important;
+            }
 
         }
 
@@ -412,41 +499,66 @@ function adicionarAnimacoes() {
 
 
 /* =====================================================
-   BRILHO QUE ACOMPANHA O DEDO/MOUSE
+   BRILHO DE TOQUE — CELULAR
 ===================================================== */
 
-function criarBrilhoMovimento() {
+function ativarToqueRoxo() {
+
+    // Não cria efeitos repetidos
+    if (document.body.dataset.toqueAtivo === "true") {
+        return;
+    }
+
+    document.body.dataset.toqueAtivo = "true";
+
+    document.addEventListener(
+        "pointerdown",
+        (evento) => {
+
+            // Ignora toque fora do site
+            if (
+                evento.target.closest("#entrada")
+            ) {
+                return;
+            }
+
+            criarBrilhoToque(
+                evento.clientX,
+                evento.clientY
+            );
+
+        },
+        {
+            passive: true
+        }
+    );
+}
+
+
+function criarBrilhoToque(x, y) {
 
     const brilho =
         document.createElement("div");
 
     brilho.className =
-        "efeito-brilho-piter";
+        "piter-toque";
 
-    brilho.style.display = "none";
+    brilho.style.left =
+        x + "px";
+
+    brilho.style.top =
+        y + "px";
 
     document.body.appendChild(brilho);
 
-    document.addEventListener(
-        "pointermove",
-        (evento) => {
-
-            brilho.style.display = "block";
-
-            brilho.style.left =
-                evento.clientX + "px";
-
-            brilho.style.top =
-                evento.clientY + "px";
-
-        }
-    );
-
+    setTimeout(() => {
+        brilho.remove();
+    }, 700);
 }
 
 
 /* =====================================================
-   MENU SUAVE
+   SCROLL SUAVE
 ===================================================== */
 
 function ativarMenu() {
@@ -455,31 +567,40 @@ function ativarMenu() {
         .querySelectorAll('a[href^="#"]')
         .forEach(link => {
 
+            // Evita adicionar o evento duas vezes
+            if (link.dataset.menuAtivo === "true") {
+                return;
+            }
+
+            link.dataset.menuAtivo = "true";
+
             link.addEventListener(
                 "click",
                 function (e) {
 
-                    const destino =
-                        document.querySelector(
-                            this.getAttribute("href")
-                        );
+                    const href =
+                        this.getAttribute("href");
 
-                    if (destino) {
-
-                        e.preventDefault();
-
-                        destino.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
+                    if (!href || href === "#") {
+                        return;
                     }
+
+                    const destino =
+                        document.querySelector(href);
+
+                    if (!destino) return;
+
+                    e.preventDefault();
+
+                    destino.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
 
                 }
             );
 
         });
-
 }
 
 
@@ -494,16 +615,26 @@ function ativarAnimacoesCards() {
             ".luta-card, " +
             ".treino-grid article, " +
             ".historia-texto, " +
+            ".historia-frase, " +
             ".evolucao, " +
             ".objetivo, " +
-            ".instagram"
+            ".instagram, " +
+            ".frase"
         );
 
-    if (!("IntersectionObserver" in window)) {
+    if (!elementos.length) return;
+
+
+    // Se o navegador não tiver IntersectionObserver,
+    // mostra tudo normalmente.
+    if (
+        !("IntersectionObserver" in window)
+    ) {
 
         elementos.forEach(elemento => {
 
             elemento.style.opacity = "1";
+
             elemento.style.transform =
                 "translateY(0)";
 
@@ -512,72 +643,246 @@ function ativarAnimacoesCards() {
         return;
     }
 
+
     const observador =
         new IntersectionObserver(
-
             (entradas) => {
 
-                entradas.forEach(
-                    (entrada) => {
+                entradas.forEach(entrada => {
 
-                        if (
-                            entrada.isIntersecting
-                        ) {
-
-                            entrada.target.style.opacity =
-                                "1";
-
-                            entrada.target.style.transform =
-                                "translateY(0)";
-
-                            observador.unobserve(
-                                entrada.target
-                            );
-
-                        }
-
+                    if (
+                        !entrada.isIntersecting
+                    ) {
+                        return;
                     }
-                );
+
+                    entrada.target.style.opacity =
+                        "1";
+
+                    entrada.target.style.transform =
+                        "translateY(0)";
+
+                    observador.unobserve(
+                        entrada.target
+                    );
+
+                });
 
             },
-
             {
-                threshold: 0.12
+                threshold: .08,
+                rootMargin: "0px 0px -30px 0px"
             }
-
         );
 
 
-    elementos.forEach(elemento => {
+    elementos.forEach((elemento, indice) => {
 
         elemento.style.opacity = "0";
 
         elemento.style.transform =
-            "translateY(35px)";
+            "translateY(28px)";
 
         elemento.style.transition =
-            "opacity .8s ease, transform .8s ease";
+            "opacity .7s ease, transform .7s ease";
+
+        // Pequeno atraso entre elementos
+        // para dar sensação de sequência
+        elemento.style.transitionDelay =
+            Math.min(indice * 40, 180) + "ms";
 
         observador.observe(elemento);
 
     });
-
 }
 
 
 /* =====================================================
-   INICIAR EFEITOS
+   BARRA DE PROGRESSO DO SCROLL
+===================================================== */
+
+function criarBarraScroll() {
+
+    if (
+        document.querySelector(
+            ".piter-scroll-progress"
+        )
+    ) {
+        return;
+    }
+
+    const barra =
+        document.createElement("div");
+
+    barra.className =
+        "piter-scroll-progress";
+
+    document.body.appendChild(barra);
+
+    let atualizando = false;
+
+
+    function atualizar() {
+
+        const documento =
+            document.documentElement;
+
+        const scrollTop =
+            documento.scrollTop;
+
+        const altura =
+            documento.scrollHeight -
+            documento.clientHeight;
+
+        if (altura <= 0) {
+            barra.style.width = "0%";
+            return;
+        }
+
+        const porcentagem =
+            (scrollTop / altura) * 100;
+
+        barra.style.width =
+            Math.min(100, Math.max(0, porcentagem))
+            + "%";
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (atualizando) return;
+
+            atualizando = true;
+
+            requestAnimationFrame(() => {
+
+                atualizar();
+
+                atualizando = false;
+
+            });
+
+        },
+        {
+            passive: true
+        }
+    );
+
+    atualizar();
+}
+
+
+/* =====================================================
+   VÍDEOS
+===================================================== */
+
+function melhorarVideos() {
+
+    const videos =
+        document.querySelectorAll("video");
+
+    videos.forEach(video => {
+
+        video.setAttribute(
+            "playsinline",
+            ""
+        );
+
+        video.setAttribute(
+            "preload",
+            "metadata"
+        );
+
+    });
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+function ativarFeedbackBotoes() {
+
+    const botoes =
+        document.querySelectorAll(
+            ".botao, button"
+        );
+
+    botoes.forEach(botao => {
+
+        if (
+            botao.dataset.feedbackAtivo === "true"
+        ) {
+            return;
+        }
+
+        botao.dataset.feedbackAtivo =
+            "true";
+
+        botao.addEventListener(
+            "pointerdown",
+            () => {
+
+                botao.style.transform =
+                    "scale(.97)";
+
+            },
+            {
+                passive: true
+            }
+        );
+
+        botao.addEventListener(
+            "pointerup",
+            () => {
+
+                botao.style.transform =
+                    "";
+
+            },
+            {
+                passive: true
+            }
+        );
+
+        botao.addEventListener(
+            "pointercancel",
+            () => {
+
+                botao.style.transform =
+                    "";
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    });
+}
+
+
+/* =====================================================
+   INICIAR TODOS OS EFEITOS
 ===================================================== */
 
 function iniciarEfeitos() {
 
     adicionarAnimacoes();
 
-    criarBrilhoMovimento();
-
     ativarMenu();
 
     ativarAnimacoesCards();
+
+    ativarToqueRoxo();
+
+    criarBarraScroll();
+
+    melhorarVideos();
+
+    ativarFeedbackBotoes();
 
 }
 
@@ -592,11 +897,9 @@ document.addEventListener(
 
         adicionarAnimacoes();
 
-        criarParticulas();
+        criarParticulasRoxas();
 
-        criarNeve();
-
-        criarMagiaNegra();
+        criarOrbRoxo();
 
     }
 );
