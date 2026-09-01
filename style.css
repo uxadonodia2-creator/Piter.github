@@ -1,8 +1,30 @@
-/* ===== CONFIGURAÇÃO GERAL ===== */
+/* =====================================================
+   PITER — DARK MODE
+   LUTA • TREINO • EVOLUÇÃO
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg: #03050c;
+    --bg2: #070b16;
+    --card: rgba(11, 18, 34, 0.78);
+    --blue: #237cff;
+    --blue2: #00b7ff;
+    --text: #f4f7ff;
+    --muted: #8490a8;
+    --line: rgba(54, 119, 255, 0.22);
+    --glow: rgba(0, 119, 255, 0.25);
+}
+
+/* =====================================================
+   RESET
+===================================================== */
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -10,193 +32,916 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #050816;
-    color: #ffffff;
     width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
+    background:
+        radial-gradient(circle at 50% 0%, #0b1c3b 0%, transparent 32%),
+        var(--bg);
+    color: var(--text);
+    font-family: 'Inter', Arial, sans-serif;
 }
 
-/* ===== CONTAINER PRINCIPAL ===== */
-.container {
-    width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 20px 16px;
+img,
+video {
+    display: block;
+    max-width: 100%;
 }
 
-/* ===== CABEÇALHO ===== */
-header {
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+::selection {
+    background: var(--blue);
+    color: white;
+}
+
+
+/* =====================================================
+   TELA DE ENTRADA
+===================================================== */
+
+#entrada {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at center, rgba(17, 63, 132, .22), transparent 38%),
+        #02030a;
+}
+
+.entrada-bg {
+    position: absolute;
+    inset: -30%;
+    background:
+        radial-gradient(circle at center, rgba(0, 102, 255, .16), transparent 25%),
+        radial-gradient(circle at 30% 70%, rgba(0, 180, 255, .08), transparent 25%);
+    animation: respirar 5s ease-in-out infinite;
+}
+
+.entrada-bg::before,
+.entrada-bg::after {
+    content: "";
+    position: absolute;
+    inset: 25%;
+    border: 1px solid rgba(40, 130, 255, .15);
+    border-radius: 50%;
+    box-shadow:
+        0 0 80px rgba(0, 102, 255, .12),
+        inset 0 0 80px rgba(0, 102, 255, .08);
+    animation: girar 15s linear infinite;
+}
+
+.entrada-bg::after {
+    inset: 35%;
+    animation-direction: reverse;
+    animation-duration: 10s;
+}
+
+.entrada-particulas {
+    position: absolute;
+    inset: 0;
+    opacity: .5;
+    background-image:
+        radial-gradient(circle, #ffffff 1px, transparent 1px),
+        radial-gradient(circle, #2587ff 1px, transparent 1px);
+    background-size: 90px 90px, 130px 130px;
+    animation: particulas 12s linear infinite;
+}
+
+.entrada-conteudo {
+    position: relative;
+    z-index: 2;
+    width: min(90%, 450px);
     text-align: center;
-    padding: 35px 10px 25px;
 }
 
-header h1 {
-    font-size: 36px;
+.mini-titulo {
+    display: block;
+    color: #7e9bcf;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+}
+
+.linha {
+    width: 55px;
+    height: 2px;
+    margin: 0 auto 20px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    box-shadow: 0 0 15px var(--blue);
+}
+
+.entrada-conteudo h1 {
+    font-size: clamp(65px, 20vw, 120px);
+    line-height: .85;
     font-weight: 900;
+    letter-spacing: -5px;
+    text-shadow:
+        0 0 20px rgba(0, 119, 255, .35),
+        0 0 70px rgba(0, 119, 255, .15);
+}
+
+.entrada-conteudo h1 span,
+.logo span,
+footer span,
+.secao h2 span,
+.instagram h2 span {
+    color: var(--blue2);
+}
+
+.entrada-conteudo p {
+    margin: 28px 0;
+    color: #8d9ab4;
+    font-size: 12px;
+    line-height: 2;
+    letter-spacing: 5px;
+}
+
+.btn-entrada {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 17px 20px;
+    border: 1px solid rgba(56, 139, 255, .4);
+    border-radius: 12px;
+    color: white;
+    background: rgba(16, 40, 80, .45);
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 0 30px rgba(0, 102, 255, .08);
+}
+
+.btn-entrada span {
+    font-size: 11px;
+    font-weight: 800;
     letter-spacing: 2px;
-    margin-bottom: 8px;
 }
 
-header p {
-    color: #aeb8d0;
-    font-size: 15px;
+.btn-entrada b {
+    font-size: 20px;
+    color: var(--blue2);
 }
 
-/* ===== MENU ===== */
+.btn-entrada:hover {
+    transform: translateY(-3px);
+    border-color: var(--blue);
+    box-shadow: 0 0 35px rgba(0, 119, 255, .3);
+}
+
+.entrada-aviso {
+    position: absolute;
+    bottom: 25px;
+    color: #475675;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   SITE
+===================================================== */
+
+#site {
+    display: none;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 85% 15%, rgba(0, 102, 255, .08), transparent 25%),
+        radial-gradient(circle at 10% 50%, rgba(0, 102, 255, .05), transparent 25%),
+        var(--bg);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topo {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid rgba(70, 120, 210, .12);
+    background: rgba(3, 5, 12, .78);
+    backdrop-filter: blur(18px);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
 nav {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 10px 0 25px;
+    gap: 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+nav::-webkit-scrollbar {
+    display: none;
 }
 
 nav a {
-    text-decoration: none;
+    flex-shrink: 0;
+    padding: 8px 9px;
+    border-radius: 8px;
+    color: #8c98ad;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    transition: .3s;
+}
+
+nav a:hover {
     color: white;
-    background: #101a35;
-    border: 1px solid #24345e;
-    padding: 11px 14px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: bold;
+    background: rgba(32, 105, 230, .12);
 }
 
-/* ===== TÍTULOS ===== */
-section {
-    margin-bottom: 35px;
-}
 
-section h2 {
-    font-size: 25px;
-    margin-bottom: 15px;
-}
+/* =====================================================
+   HERO
+===================================================== */
 
-/* ===== CARDS ===== */
-.card,
-.luta-card {
-    width: 100%;
-    background: linear-gradient(145deg, #0d1630, #080d20);
-    border: 1px solid #1c2d55;
-    border-radius: 18px;
-    padding: 15px;
-    margin-bottom: 18px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-/* ===== IMAGENS ===== */
-.luta-imagem {
-    width: 100%;
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 650px;
+    padding: 70px 20px;
     overflow: hidden;
-    border-radius: 14px;
-    margin-bottom: 14px;
+    background:
+        radial-gradient(circle at 80% 45%, rgba(0, 102, 255, .18), transparent 30%),
+        linear-gradient(180deg, rgba(4, 10, 24, .2), #03050c);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -130px;
+    top: 180px;
+    border-radius: 50%;
+    background: rgba(0, 102, 255, .14);
+    filter: blur(70px);
+}
+
+.hero-conteudo {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 520px);
+    margin: auto;
+}
+
+.categoria {
+    display: inline-block;
+    color: #5f8bd2;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.hero h2 {
+    margin-top: 15px;
+    font-size: clamp(65px, 22vw, 130px);
+    line-height: .85;
+    font-weight: 900;
+    letter-spacing: -6px;
+    text-shadow: 0 0 50px rgba(0, 119, 255, .16);
+}
+
+.hero-linha {
+    width: 75px;
+    height: 3px;
+    margin: 18px 0;
+    background: linear-gradient(90deg, var(--blue), transparent);
+    box-shadow: 0 0 15px var(--blue);
+}
+
+.hero h3 {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #9aa7bf;
+}
+
+.hero p {
+    max-width: 380px;
+    margin: 20px 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.hero-botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+}
+
+.botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 50px;
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    transition: .3s;
+}
+
+.botao span {
+    color: var(--blue2);
+    font-size: 17px;
+}
+
+.botao.principal {
+    background: linear-gradient(135deg, #0c3d88, #0b1d43);
+    box-shadow: 0 10px 35px rgba(0, 102, 255, .15);
+}
+
+.botao.secundario {
+    background: rgba(10, 18, 35, .5);
+    color: #9ba7bd;
+}
+
+.botao:hover {
+    transform: translateY(-3px);
+    border-color: var(--blue);
+    box-shadow: 0 10px 35px rgba(0, 102, 255, .22);
+}
+
+.hero-numero {
+    position: absolute;
+    right: 15px;
+    bottom: 25px;
+    color: rgba(80, 120, 180, .15);
+    font-size: 90px;
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   FRASE
+===================================================== */
+
+.frase {
+    padding: 80px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(50, 100, 180, .1);
+    border-bottom: 1px solid rgba(50, 100, 180, .1);
+}
+
+.frase > span {
+    color: var(--blue);
+    font-size: 45px;
+}
+
+.frase h2 {
+    margin: 10px auto 25px;
+    max-width: 600px;
+    font-size: clamp(25px, 7vw, 45px);
+    line-height: 1.2;
+}
+
+.frase strong {
+    display: block;
+    color: var(--blue2);
+}
+
+.frase-linha {
+    width: 60px;
+    height: 2px;
+    margin: auto;
+    background: var(--blue);
+    box-shadow: 0 0 15px var(--blue);
+}
+
+
+/* =====================================================
+   SEÇÕES
+===================================================== */
+
+.secao {
+    width: min(100% - 30px, 1050px);
+    margin: auto;
+    padding: 85px 0;
+}
+
+.titulo-secao {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.secao h2,
+.instagram h2 {
+    margin-top: 10px;
+    font-size: clamp(40px, 12vw, 75px);
+    line-height: .9;
+    letter-spacing: -3px;
+}
+
+.titulo-secao p,
+.descricao {
+    max-width: 500px;
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.numero-secao {
+    color: rgba(50, 110, 200, .18);
+    font-size: 70px;
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   LUTAS
+===================================================== */
+
+.lutas-container {
+    display: grid;
+    gap: 25px;
+}
+
+.luta-card {
+    overflow: hidden;
+    border: 1px solid rgba(60, 110, 200, .17);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(14, 25, 48, .8), rgba(5, 9, 18, .9));
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .3);
+}
+
+.luta-imagem {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
 }
 
 .luta-imagem img {
-    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .7s;
+}
+
+.luta-card:hover .luta-imagem img {
+    transform: scale(1.05);
+}
+
+.imagem-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(2, 5, 12, .9));
+}
+
+.luta-numero {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.luta-conteudo {
+    padding: 20px;
+}
+
+.anime {
+    color: var(--blue2);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.luta-conteudo h3 {
+    margin-top: 10px;
+    font-size: clamp(24px, 7vw, 40px);
+    line-height: 1;
+}
+
+.luta-conteudo h3 span {
+    color: #53627d;
+    font-size: .45em;
+    margin: 0 5px;
+}
+
+.luta-conteudo p {
+    margin: 15px 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.video-box {
+    overflow: hidden;
+    margin-top: 18px;
+    border: 1px solid rgba(50, 120, 230, .18);
+    border-radius: 13px;
+    background: black;
+}
+
+.video-box video {
     width: 100%;
     height: auto;
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: 14px;
 }
 
-/* ===== VÍDEOS ===== */
-video {
-    display: block;
+.luta-botao {
     width: 100%;
-    max-width: 100%;
-    border-radius: 14px;
-    background: #000;
-    margin-top: 12px;
+    background: rgba(20, 50, 100, .35);
+    color: #71809c;
+    cursor: default;
 }
 
-/* ===== TEXTOS DAS LUTAS ===== */
-.luta-card h3 {
-    font-size: 21px;
-    margin-bottom: 7px;
+
+/* =====================================================
+   HISTÓRIA
+===================================================== */
+
+.historia {
+    border-top: 1px solid rgba(50, 100, 180, .1);
 }
 
-.luta-card p {
-    color: #aeb8d0;
-    line-height: 1.6;
-    font-size: 14px;
+.historia-grid {
+    display: grid;
+    gap: 35px;
 }
 
-/* ===== BOTÕES ===== */
-button,
-.botao,
-.btn {
-    display: inline-block;
-    width: 100%;
-    border: none;
-    border-radius: 13px;
-    padding: 14px;
-    margin-top: 12px;
-    background: #14295c;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
+.historia-frase {
+    padding: 25px;
+    border-left: 2px solid var(--blue);
+    background: linear-gradient(90deg, rgba(20, 70, 140, .1), transparent);
 }
 
-/* ===== INSTAGRAM ===== */
-.instagram {
-    text-align: center;
-    padding: 25px 15px;
-    background: #0c1530;
-    border-radius: 18px;
-    border: 1px solid #1c2d55;
+.historia-frase span {
+    color: var(--blue2);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 3px;
 }
 
-.instagram a {
-    display: block;
+.historia-frase h3 {
     margin-top: 15px;
-    padding: 14px;
-    border-radius: 13px;
-    background: #172d63;
+    font-size: 30px;
+    line-height: 1.05;
+}
+
+.historia-texto p {
+    margin-bottom: 20px;
+    color: #8996ae;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.historia-final {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
     color: white;
-    text-decoration: none;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
-/* ===== RODAPÉ ===== */
-footer {
-    text-align: center;
-    color: #687594;
+.historia-final b {
+    color: var(--blue2);
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   TREINO
+===================================================== */
+
+.treino {
+    border-top: 1px solid rgba(50, 100, 180, .1);
+}
+
+.treino-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.treino-card {
+    position: relative;
+    min-height: 220px;
+    overflow: hidden;
+    padding: 25px;
+    border: 1px solid rgba(60, 110, 200, .17);
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(0, 119, 255, .15), transparent 35%),
+        rgba(8, 14, 28, .8);
+    transition: .3s;
+}
+
+.treino-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 140, 255, .5);
+}
+
+.treino-anime {
+    color: #6386be;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.treino-icon {
+    margin: 25px 0 15px;
+    font-size: 35px;
+}
+
+.treino-card h3 {
+    font-size: 23px;
+}
+
+.treino-card p {
+    max-width: 280px;
+    margin-top: 10px;
+    color: var(--muted);
     font-size: 12px;
-    padding: 25px 10px;
+    line-height: 1.7;
 }
 
-/* ===== CELULAR ===== */
-@media (max-width: 600px) {
-    .container {
-        padding: 15px 12px;
+.treino-numero {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    color: rgba(60, 130, 230, .13);
+    font-size: 55px;
+    font-weight: 900;
+}
+
+.evolucao {
+    margin-top: 35px;
+    padding: 25px;
+    border: 1px solid rgba(50, 100, 180, .15);
+    border-radius: 18px;
+    background: rgba(8, 14, 27, .7);
+}
+
+.evolucao h3 {
+    margin: 12px 0 25px;
+    font-size: 22px;
+}
+
+.progresso {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.progresso div {
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(24, 45, 80, .3);
+    color: #8190aa;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.progresso span {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--blue2);
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   OBJETIVO
+===================================================== */
+
+.objetivo {
+    position: relative;
+    overflow: hidden;
+    padding: 90px 20px;
+    text-align: center;
+    background:
+        radial-gradient(circle, rgba(0, 102, 255, .16), transparent 40%);
+}
+
+.objetivo h2 {
+    margin: 18px 0;
+    font-size: clamp(38px, 11vw, 75px);
+    line-height: .9;
+}
+
+.objetivo strong {
+    color: var(--blue2);
+}
+
+.objetivo p {
+    margin-bottom: 25px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.objetivo .botao {
+    width: min(100%, 330px);
+    margin: auto;
+}
+
+
+/* =====================================================
+   INSTAGRAM
+===================================================== */
+
+.instagram {
+    width: min(100% - 30px, 800px);
+    margin: 40px auto 80px;
+    padding: 60px 20px;
+    text-align: center;
+    border: 1px solid rgba(40, 110, 230, .22);
+    border-radius: 25px;
+    background:
+        radial-gradient(circle at center, rgba(0, 102, 255, .12), transparent 55%),
+        rgba(8, 14, 28, .75);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+}
+
+.instagram p {
+    max-width: 400px;
+    margin: 20px auto 25px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.instagram-botao {
+    width: min(100%, 300px);
+    margin: auto;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(50, 100, 180, .1);
+}
+
+.footer-logo {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+footer p {
+    margin: 10px 0;
+    color: #53627c;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+footer > span {
+    color: #38445a;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
+
+@keyframes respirar {
+    0%, 100% {
+        transform: scale(1);
+        opacity: .7;
     }
 
-    header h1 {
-        font-size: 30px;
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
     }
 
-    section h2 {
-        font-size: 23px;
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes particulas {
+    from {
+        transform: translateY(0);
     }
 
-    .card,
-    .luta-card {
-        padding: 12px;
-        border-radius: 16px;
+    to {
+        transform: translateY(-90px);
+    }
+}
+
+
+/* =====================================================
+   TELAS MAIORES
+===================================================== */
+
+@media (min-width: 700px) {
+
+    .topo {
+        padding: 18px 35px;
     }
 
     nav {
-        gap: 6px;
+        gap: 15px;
     }
 
     nav a {
-        font-size: 13px;
-        padding: 9px 11px;
+        font-size: 10px;
+        padding: 10px 12px;
+    }
+
+    .hero {
+        min-height: 760px;
+        padding: 100px 40px;
+    }
+
+    .hero-botoes {
+        flex-direction: row;
+        max-width: 500px;
+    }
+
+    .botao {
+        min-width: 160px;
+    }
+
+    .lutas-container {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start;
+    }
+
+    .luta-card.destaque {
+        grid-column: span 2;
+    }
+
+    .historia-grid {
+        grid-template-columns: 1fr 1.3fr;
+        align-items: center;
+    }
+
+    .treino-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .progresso {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+/* =====================================================
+   TELAS GRANDES
+===================================================== */
+
+@media (min-width: 1000px) {
+
+    .hero-conteudo {
+        margin-left: max(30px, calc((100vw - 1050px) / 2));
+    }
+
+    .secao {
+        padding-top: 120px;
+        padding-bottom: 120px;
     }
 }
